@@ -1,0 +1,48 @@
+{
+  "name": "ParkingLotTrackerMobileApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "watch": "npm run build -- -w",
+    "fixGradle": "(cd android/ && ./gradlew assembleDebug)",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/",
+    "test": "npm run build-test && jest --coverage",
+    "start:a": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'",
+    "start:ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios'",
+    "tsc": "tsc",
+    "clean": "rimraf artifacts",
+    "clean-test": "rimraf artifacts && rimraf coverage",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "build-test": "npm run clean-test && tsc -p tsconfig.test.json",
+    "lint": "tslint src/**/*.ts"
+  },
+  "dependencies": {
+    "react": "15.4.2",
+    "react-native": "0.42.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@types/react": "^15.0.21",
+    "@types/react-native": "^0.42.14",
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "concurrently": "^3.4.0",
+    "jest": "19.0.2",
+    "react-test-renderer": "15.4.2",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.0.0",
+    "typescript": "^2.2.2"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testRegex": "artifacts/__tests__/*.*.js$",
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text-summary",
+      "html"
+    ],
+    "collectCoverageFrom" : ["artifacts/src/**/*.js"]
+  }
+}
+
