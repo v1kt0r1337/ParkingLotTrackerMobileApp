@@ -7,12 +7,14 @@
     "fixGradle": "(cd android/ && ./gradlew assembleDebug)",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/",
-    "test": "npm run build && jest --coverage",
+    "test": "npm run build-test && jest --coverage",
     "start:a": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'",
     "start:ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios'",
     "tsc": "tsc",
     "clean": "rimraf artifacts",
-    "build": "npm run clean && tsc -p .",
+    "clean-test": "rimraf artifacts && rimraf coverage",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "build-test": "npm run clean-test && tsc -p tsconfig.test.json",
     "lint": "tslint src/**/*.ts"
   },
   "dependencies": {
