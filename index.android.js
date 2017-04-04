@@ -1,4 +1,4 @@
 /**
  * Created by archheretic on 04.04.17.
  */
-require("./artifacts/root.android.js");
+require("./artifacts/src/root.android.js");

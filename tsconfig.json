@@ -3,11 +3,15 @@
     "module": "commonjs",
     "target": "es6",
     "jsx": "react",
-    "rootDir": "src",
     "outDir": "artifacts",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": false
   },
+  "include": [
+    "src",
+    "__tests__"
+  ],
   "filesGlob": [
     "typings/index.d.ts",
     "src/**/*.ts",

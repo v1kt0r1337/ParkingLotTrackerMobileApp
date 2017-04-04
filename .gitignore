@@ -43,3 +43,6 @@ android/keystores/debug.keystore
 # TypeScript artifacts
 artifacts
 typings
+
+# Files generated through tests
+coverage

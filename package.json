@@ -7,7 +7,7 @@
     "fixGradle": "(cd android/ && ./gradlew assembleDebug)",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/",
-    "test": "jest",
+    "test": "npm run build && jest --coverage",
     "start:a": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'",
     "start:ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios'",
     "tsc": "tsc",
@@ -33,6 +33,14 @@
     "typescript": "^2.2.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testRegex": "artifacts/__tests__/*.*.js$",
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text-summary",
+      "html"
+    ],
+    "collectCoverageFrom" : ["artifacts/src/**/*.js"]
   }
 }
+
