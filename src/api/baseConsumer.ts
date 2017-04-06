@@ -1,6 +1,7 @@
 /**
  * Created by archheretic on 05.04.17.
  */
+import {ParkingLot} from "../models/parkingLot.model";
 
 const baseUrl: string = "http://158.37.63.8";
 const parkinglots: string = "/api/v0/parkinglots";
@@ -16,9 +17,8 @@ export class BaseConsumer {
                 }
             });
             const responseJson = await response.json();
-            console.log("responseJson");
-            console.log(responseJson);
-            return responseJson;
+            const parkingLots: ParkingLot[] = responseJson.parkingLots;
+            return parkingLots;
         }
         catch (error) {
             console.error(error);

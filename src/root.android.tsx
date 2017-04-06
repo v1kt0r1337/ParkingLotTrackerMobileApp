@@ -7,10 +7,12 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View
+    View,
+    ScrollView
 } from "react-native";
 import PureComponent = React.PureComponent;
 import { BaseConsumer } from "./api/baseConsumer";
+import {ParkingLot} from "./models/parkingLot.model";
 
 const baseConsumer = new BaseConsumer();
 
@@ -26,8 +28,8 @@ export default class ParkingLotTrackerMobileApp extends PureComponent<Props, Sta
     constructor(props) {
         super(props);
         this.state = {
-            titleText: "API Data",
-            bodyText: "Data incoming!"
+            titleText: "Parkeringsplasser generell informasjon",
+            bodyText: "Trøbbel på linja!"
         };
     }
 
@@ -35,13 +37,18 @@ export default class ParkingLotTrackerMobileApp extends PureComponent<Props, Sta
         this.fetchData();
     }
     async fetchData() {
-        this.setState({titleText: "API Data Updated", bodyText: JSON.stringify(await baseConsumer.getAllParkinglots())}) ;
+        const parkingLots: ParkingLot[] = await baseConsumer.getAllParkinglots();
+        let bodyText: string = "";
+        for (let i = 0; i < parkingLots.length; i++) {
+            bodyText += i + 1 + ". " + parkingLots[i].name + "\nKapasitet: " + parkingLots[i].capacity
+                + "\nServerte parkeringer: " + parkingLots[i].reservedSpaces + "\n";
+        }
+        this.setState({bodyText: bodyText});
     }
 
     render() {
-        console.log("heey");
-        // console.log(test);
         return (
+            <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.welcome}>
                     Welcome to React Native with TypeScript!
@@ -59,6 +66,7 @@ export default class ParkingLotTrackerMobileApp extends PureComponent<Props, Sta
                     {this.state.bodyText}
                 </Text>
             </View>
+            </ScrollView>
         );
     }
 }
