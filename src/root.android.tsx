@@ -13,6 +13,8 @@ import {
 import PureComponent = React.PureComponent;
 import { BaseConsumer } from "./api/baseConsumer";
 import {ParkingLot} from "./models/parkingLot.model";
+import {ParkingLog} from "./models/parkingLog.model";
+
 
 const baseConsumer = new BaseConsumer();
 
@@ -20,7 +22,8 @@ export interface Props {}
 
 export interface State {
     titleText: string;
-    bodyText: any;
+    parkingLotText: string;
+    // parkingLogText: string;
 }
 
 export default class ParkingLotTrackerMobileApp extends PureComponent<Props, State> {
@@ -28,8 +31,8 @@ export default class ParkingLotTrackerMobileApp extends PureComponent<Props, Sta
     constructor(props) {
         super(props);
         this.state = {
-            titleText: "Parkeringsplasser generell informasjon",
-            bodyText: "Trøbbel på linja!"
+            titleText: "Parkeringsplasser",
+            parkingLotText: "Trøbbel på linja!"
         };
     }
 
@@ -38,32 +41,36 @@ export default class ParkingLotTrackerMobileApp extends PureComponent<Props, Sta
     }
     async fetchData() {
         const parkingLots: ParkingLot[] = await baseConsumer.getAllParkinglots();
-        let bodyText: string = "";
+        let parkingLogs: ParkingLog[] = new Array<ParkingLog>();
+        let parkingLog: ParkingLog;
+        let parkingLotText: string = "";
         for (let i = 0; i < parkingLots.length; i++) {
-            bodyText += i + 1 + ". " + parkingLots[i].name + "\nKapasitet: " + parkingLots[i].capacity
-                + "\nServerte parkeringer: " + parkingLots[i].reservedSpaces + "\n";
+            parkingLog = await baseConsumer.getLatestParkinglogBasedOnParkingLotId(parkingLots[i].id);
+            // parkingLogs.push(parkingLog);
+            parkingLotText += i + 1 + ". " + parkingLots[i].name + "\nLedige plasser: " +
+                (parkingLots[i].capacity - parkingLog.currentParked) + "\nTotal Kapasitet: " + parkingLots[i].capacity
+                + "\nReserverte parkeringer: " + parkingLots[i].reservedSpaces + "\n";
         }
-        this.setState({bodyText: bodyText});
+
+        /*
+        let parkingLogText: string = "";
+        for (let i = 0; i < parkingLogs.length; i++) {
+            parkingLogText += "\nparkingLot_id: " + parkingLogs[i].parkingLot_id + "\nOpptatte plasser: " + parkingLogs[i].currentParked
+                 + "\n";
+        }
+        */
+
+        this.setState({parkingLotText: parkingLotText});
     }
 
     render() {
         return (
             <ScrollView>
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to React Native with TypeScript!
-                </Text>
-                <Text style={styles.instructions}>
-                    To get started, edit index.android.js
-                </Text>
-                <Text style={styles.instructions}>
-                    Double tap R on your keyboard to reload,{"\n"}
-                    Shake or press menu button for dev menu
-                </Text>
                 <Text style={styles.instructions}>
                     {this.state.titleText}
                     {"\n"}
-                    {this.state.bodyText}
+                    {this.state.parkingLotText}
                 </Text>
             </View>
             </ScrollView>
