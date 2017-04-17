@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@types/react": "^15.0.21",
-    "@types/react-native": "^0.42.14",
+    "@types/react-native": "^0.43.1",
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
     "concurrently": "^3.4.0",
