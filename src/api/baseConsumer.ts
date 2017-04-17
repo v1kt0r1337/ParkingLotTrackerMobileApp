@@ -3,6 +3,8 @@
  */
 import {ParkingLot} from "../models/parkingLot.model";
 import {ParkingLog} from "../models/parkingLog.model";
+import {ParkingLotInfo} from "../models/parkingLotInfo.model";
+
 
 const baseUrl: string = "http://158.37.63.8";
 const parkinglots: string = "/api/v0/parkinglots";
@@ -63,6 +65,28 @@ export class BaseConsumer {
             console.error(error);
         }
     }
+
+    /**
+     * This method should not be here
+     * Returns an array containing data that can be displayed in the mobile application.
+     */
+    public async getParkingLotInfo() {
+        const parkingLots: ParkingLot[] = await this.getAllParkinglots();
+        let infoArray: ParkingLotInfo[] = new Array<ParkingLotInfo>();
+        let parkingLog: ParkingLog;
+        for (let i = 0; i < parkingLots.length; i++) {
+            parkingLog = await this.getLatestParkinglogBasedOnParkingLotId(parkingLots[i].id);
+            const parkingLotInfo: ParkingLotInfo = {
+                name: parkingLots[i].name,
+                freeSpaces: (parkingLots[i].capacity - parkingLog.currentParked),
+                capacity: parkingLots[i].capacity,
+                reservedSpaces: parkingLots[i].reservedSpaces
+            };
+            infoArray.push(parkingLotInfo);
+        }
+        return infoArray;
+    }
+
     //// similar method using promises.
     // public getAllParkinglots() {
     //     fetch(baseUrl + parkinglots, {
