@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "react": "15.4.2",
-    "react-native": "0.42.3"
+    "react-native": "0.42.3",
+    "react-navigation": "^1.0.0-beta.7"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
@@ -42,7 +43,8 @@
       "text-summary",
       "html"
     ],
-    "collectCoverageFrom" : ["artifacts/src/**/*.js"]
+    "collectCoverageFrom": [
+      "artifacts/src/**/*.js"
+    ]
   }
 }
-
