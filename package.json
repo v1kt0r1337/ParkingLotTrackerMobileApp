@@ -19,12 +19,13 @@
   },
   "dependencies": {
     "react": "15.4.2",
-    "react-native": "0.42.3"
+    "react-native": "0.42.3",
+    "react-navigation": "^1.0.0-beta.7"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@types/react": "^15.0.21",
-    "@types/react-native": "^0.42.14",
+    "@types/react-native": "^0.43.1",
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
     "concurrently": "^3.4.0",
@@ -42,7 +43,8 @@
       "text-summary",
       "html"
     ],
-    "collectCoverageFrom" : ["artifacts/src/**/*.js"]
+    "collectCoverageFrom": [
+      "artifacts/src/**/*.js"
+    ]
   }
 }
-
