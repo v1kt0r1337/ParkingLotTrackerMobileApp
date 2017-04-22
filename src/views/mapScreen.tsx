@@ -3,20 +3,44 @@
  */
 import * as React from "react";
 import {
-    AppRegistry,
+    StyleSheet,
+    View,
     Text
 } from "react-native";
-import { StackNavigator } from "react-navigation";
-
-import { TabNavigator } from "react-navigation";
+import MapView from 'react-native-maps';
 
 export interface Props {
     navigation: any;
 }
 
 export interface State {}
+
 export class MapScreen extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+    }
+    //
+    // render() {
+    //     return <Text>hei</Text>
+    // }
     render() {
-        return <Text>Map with parking lots marked</Text>
+        return (
+            <MapView
+                style={styles.container}
+                initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            }}
+            />
+        );
+
     }
 }
+
+const styles: any = StyleSheet.create({
+    container: {
+        flex: 1,
+    }
+});
