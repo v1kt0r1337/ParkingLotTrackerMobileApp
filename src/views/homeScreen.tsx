@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Text,
     View,
-    ListView, ListViewDataSource
+    ListView, ListViewDataSource, TextStyle, ViewStyle
 } from "react-native";
 import PureComponent = React.PureComponent;
 import { BaseConsumer } from "../api/baseConsumer";
@@ -88,8 +88,16 @@ export class HomeScreen extends PureComponent<Props, State> {
     }
 }
 
-const styles: any = StyleSheet.create({
-    container: {
+
+interface Style {
+    container: ViewStyle,
+    title: TextStyle,
+    parkingLotName: TextStyle,
+    parkingLotFreeSpaces: TextStyle,
+    parkingLotContent:TextStyle
+}
+
+const styles = StyleSheet.create<Style>({    container: {
         flex: 1,
         // justifyContent: "center",
         // alignItems: "center",

@@ -1,13 +1,21 @@
 /**
  * Created by archheretic on 19.04.17.
+ *
+ * Error: Element type is invalid: expected a string (for built-in components) or a class/function
+ * (for composoite components) but got: undefined. Check the render method for `MapScreen`.
  */
 import * as React from "react";
 import {
     StyleSheet,
     View,
-    Text
+    Text,
+    ViewStyle,
+    ImageStyle
 } from "react-native";
-import MapView from 'react-native-maps';
+//import * as nativeMaps from 'react-native-maps';
+//import {MapView} from nativeMaps;
+
+const MapView = require('react-native-maps');
 
 export interface Props {
     navigation: any;
@@ -21,9 +29,12 @@ export class MapScreen extends React.Component<Props, State> {
     }
     //
     // render() {
-    //     return <Text>hei</Text>
+    //     return <Text>hei</Text>rr
     // }
     render() {
+        console.log("MapView:");
+
+        console.log(MapView);
         return (
             <MapView
                 style={styles.container}
@@ -39,8 +50,15 @@ export class MapScreen extends React.Component<Props, State> {
     }
 }
 
-const styles: any = StyleSheet.create({
+interface Style {
+    container: ImageStyle
+}
+
+const styles = StyleSheet.create<Style>({
     container: {
-        flex: 1,
-    }
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,  }
 });
