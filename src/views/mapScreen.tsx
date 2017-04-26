@@ -22,8 +22,43 @@ export interface State {
         longitude: number,
         latitudeDelta: number,
         longitudeDelta: number
-    }
+    },
+    markers: Marker[];
 }
+
+interface Marker {
+    latlng: {latitude: number, longitude: number},
+    title: string,
+    description: string
+}
+
+// hardcoded data that will be removed.
+const marker1: Marker = {
+    latlng: {latitude: 58.1634301, longitude: 8.0063132},
+    title: "Student Organisasjonen",
+    description: "Kapasitet 31/100"
+};
+
+const marker2: Marker = {
+    latlng: {latitude: 58.1644578, longitude: 8.0005553},
+    title: "Hokus Pokus Barnehage",
+    description: "Kapasitet 18/70"
+};
+
+const marker3: Marker = {
+    latlng: {latitude: 58.1619643, longitude: 8.0013493},
+    title: "Vegard Hauges Plass",
+    description: "Kapasitet 55/60"
+};
+
+const marker4: Marker = {
+    latlng: {latitude: 58.1625547, longitude: 8.0070819},
+    title: "Spicheren",
+    description: "Kapasitet 70/70"
+};
+
+
+// 1: 58.1634301,8.0063132, 2: 58.1644578,8.0005553 ?
 
 const earthRadiusInKM = 6371;
 // you can customize these two values based on your needs
@@ -40,7 +75,10 @@ export class MapScreen extends React.Component<Props, State> {
                 longitude: -122.4324,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
-            }
+            },
+            markers: [
+                marker1, marker2, marker3, marker4
+            ]
         }
     }
 
@@ -64,8 +102,8 @@ export class MapScreen extends React.Component<Props, State> {
                     longitudeDelta: longitudeDelta
                 }});
             },
-            (error) => alert(error.message),
-            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+            // (error) => alert(error.message),
+            // {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
         );
         this.watchID = navigator.geolocation.watchPosition((position) => {
             console.log(position);
@@ -97,7 +135,15 @@ export class MapScreen extends React.Component<Props, State> {
                 style={styles.container}
                 initialRegion={this.state.currentRegion}
                 showsUserLocation = {true}
-            />
+            >
+                {this.state.markers.map(marker => (
+                    <MapView.Marker
+                        coordinate={marker.latlng}
+                        title={marker.title}
+                        description={marker.description}
+                    />
+                ))}
+            </MapView>
         );
 
     }
