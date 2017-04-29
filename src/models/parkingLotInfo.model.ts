@@ -9,6 +9,7 @@ export class ParkingLotInfo {
     capacity: number;
     reservedSpaces: number;
     freeSpaces: number;
+    latlng: { latitude: number, longitude: number};
 }
 //
 // parkingLotText += i + 1 + ". " + parkingLots[i].name + "\nLedige plasser: " +
