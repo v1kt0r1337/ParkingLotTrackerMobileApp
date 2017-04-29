@@ -80,7 +80,9 @@ export class BaseConsumer {
                 name: parkingLots[i].name,
                 freeSpaces: (parkingLots[i].capacity - parkingLog.currentParked),
                 capacity: parkingLots[i].capacity,
-                reservedSpaces: parkingLots[i].reservedSpaces
+                reservedSpaces: parkingLots[i].reservedSpaces,
+                latlng: { latitude: parkingLots[i].lat,
+                longitude: parkingLots[i].lng }
             };
             infoArray.push(parkingLotInfo);
         }

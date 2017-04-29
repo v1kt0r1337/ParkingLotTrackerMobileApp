@@ -9,7 +9,10 @@ import {
     StyleSheet,
     ImageStyle
 } from "react-native";
+import {ParkingLotInfo} from "../models/parkingLotInfo.model";
+import { BaseConsumer } from "../api/baseConsumer";
 
+const baseConsumer = new BaseConsumer();
 const MapView = require("react-native-maps");
 
 export interface Props {
@@ -32,34 +35,6 @@ interface Marker {
     description: string
 }
 
-// hardcoded data that will be removed.
-const marker1: Marker = {
-    latlng: {latitude: 58.1634301, longitude: 8.0063132},
-    title: "Student Organisasjonen",
-    description: "Kapasitet 31/100"
-};
-
-const marker2: Marker = {
-    latlng: {latitude: 58.1644578, longitude: 8.0005553},
-    title: "Hokus Pokus Barnehage",
-    description: "Kapasitet 18/70"
-};
-
-const marker3: Marker = {
-    latlng: {latitude: 58.1619643, longitude: 8.0013493},
-    title: "Vegard Hauges Plass",
-    description: "Kapasitet 55/60"
-};
-
-const marker4: Marker = {
-    latlng: {latitude: 58.1625547, longitude: 8.0070819},
-    title: "Spicheren",
-    description: "Kapasitet 70/70"
-};
-
-
-// 1: 58.1634301,8.0063132, 2: 58.1644578,8.0005553 ?
-
 const earthRadiusInKM = 6371;
 // you can customize these two values based on your needs
 const radiusInKM = 0.5;
@@ -76,15 +51,14 @@ export class MapScreen extends React.Component<Props, State> {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
             },
-            markers: [
-                marker1, marker2, marker3, marker4
-            ]
+            markers: []
         }
     }
 
     watchID: number = null;
 
     componentDidMount() {
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 console.log(position);
@@ -118,17 +92,30 @@ export class MapScreen extends React.Component<Props, State> {
                 latitudeDelta: latitudeDelta,
                 longitudeDelta: longitudeDelta
             }});
-        })
+        });
+         this.fetchData();
+    }
+
+    async fetchData() {
+        const parkingLotInfo: ParkingLotInfo[] = await baseConsumer.getParkingLotInfo();
+        let markers: Marker[] = new Array<Marker>();
+        for (let i of parkingLotInfo) {
+            const marker: Marker = {
+                latlng: i.latlng,
+                title: i.name,
+                description: "Ledig: " + i.freeSpaces + " av " + i.capacity
+            };
+            markers.push(marker);
+        }
+        this.setState({markers: markers});
     }
 
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchID);
     }
 
-
     render() {
         console.log("MapView:");
-
         console.log(MapView);
         return (
             <MapView
@@ -145,7 +132,6 @@ export class MapScreen extends React.Component<Props, State> {
                 ))}
             </MapView>
         );
-
     }
 }
 
@@ -169,4 +155,3 @@ function deg2rad (angle) {
 function rad2deg (angle) {
     return angle * 57.29577951308232 // angle / Math.PI * 180
 }
-
