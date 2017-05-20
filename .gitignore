@@ -48,6 +48,8 @@ typings
 # Files generated through tests
 coverage
 
-# git update-index --assume-unchanged android/gradle.properties
+# Assumed unchanged files.
 # android/gradle.properties is assumed unchanged (to hide sensitive information)
 # to start tracking this file again: git update-index --no-assume-unchanged android/gradle.properties
+# AndroidManifest is assumed unchanged to hide API keys.
+# to start tracking this file again: git update-index --no-assume-unchanged android/app/src/main/AndroidManifest.xml
