@@ -39,6 +39,7 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
+android/app/my-release-key.keystore
 
 # TypeScript artifacts
 artifacts
