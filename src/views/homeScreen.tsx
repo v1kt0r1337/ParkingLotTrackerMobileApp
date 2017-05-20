@@ -64,7 +64,7 @@ export class HomeScreen extends PureComponent<Props, State> {
                             backgroundColor = "orange";
                         }
                         else if (rowData.freeSpaces === 0) {
-                            backgroundColor = "red";
+                            backgroundColor = "orangered";
                         }
                         return (
                         <Text style={styles.parkingLotName}>
@@ -72,12 +72,10 @@ export class HomeScreen extends PureComponent<Props, State> {
                             <Text style={styles.parkingLotContent}>
                                 {"\n"}
                                 <Text style={[styles.parkingLotFreeSpaces, {backgroundColor: backgroundColor}]}>
-                                    Ledige plasser {rowData.freeSpaces}
+                                    Ledig: {rowData.freeSpaces} av {rowData.capacity}
                                 </Text>
                                 {"\n"}
                                 Reservert {rowData.reservedSpaces}
-                                {"\n"}
-                                Kapasitet {rowData.capacity}
                             </Text>
                         </Text>
                     )}
