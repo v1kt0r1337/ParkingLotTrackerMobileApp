@@ -1,4 +1,4 @@
-package com.parkinglottrackermobileapp;
+package com.parkinglottracker;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,4 +1,4 @@
-package com.parkinglottrackermobileapp;
+package com.parkinglottracker;
 
 import android.app.Application;
 
