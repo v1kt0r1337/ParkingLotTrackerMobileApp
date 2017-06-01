@@ -1,12 +1,17 @@
 # ParkingLotTrackerMobileApp
+Version: 0.6
 
 A mobile application for the parking lot tracker, written in TypeScript and using the mobile framework React Native. 
 In the app the user can see which parking lots that got empty spaces, and can find tracked parking lots near their
 location in Google Map.
 Currently only Android is supported, but should be very quick to get iOS up and running. 
-Link to APK:
 
-Version:
+Link to APK: https://play.google.com/store/apps/details?id=com.parkinglottracker&hl=en
+
+### Related projects
+Raspberry Pi Parking Lot Tracker: https://github.com/Archheretic/ParkingLotTracker
+
+Backend server application: https://github.com/Archheretic/ParkingLotTrackerServer
 
 ## Table of Contents
 - [Getting Started](#getting-started)
@@ -101,4 +106,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 Thanks to https://github.com/mysqljs/mysql for README inspiration,
 and a big thanks to the whole open source community that has created the development framework and our dependencies in general.
-
