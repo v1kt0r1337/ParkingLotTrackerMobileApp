@@ -17,7 +17,7 @@ import { TabNavigator } from "react-navigation";
 const ParkingLotTrackerMobileApp = TabNavigator({
     Hjem: { screen: HomeScreen },
     Kart: { screen: MapScreen },
-    Innstillinger: { screen: SettingsScreen },
+    //Innstillinger: { screen: SettingsScreen },
 
 });
 

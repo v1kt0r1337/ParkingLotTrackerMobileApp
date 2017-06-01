@@ -32,7 +32,9 @@ export interface State {
 interface Marker {
     latlng: {latitude: number, longitude: number},
     title: string,
-    description: string
+    description: string;
+    // key is used to uniquely identify the Marker when used in the MapView.
+    key: string
 }
 
 const earthRadiusInKM = 6371;
@@ -103,7 +105,8 @@ export class MapScreen extends React.Component<Props, State> {
             const marker: Marker = {
                 latlng: i.latlng,
                 title: i.name,
-                description: "Ledig: " + i.freeSpaces + " av " + i.capacity
+                description: "Ledig: " + i.freeSpaces + " av " + i.capacity,
+                key: i.latlng.longitude.toString() + i.latlng.latitude.toString()
             };
             markers.push(marker);
         }
@@ -124,7 +127,7 @@ export class MapScreen extends React.Component<Props, State> {
                 showsUserLocation = {true}
             >
                 {this.state.markers.map(marker => (
-                    <MapView.Marker
+                    <MapView.Marker key={marker.key}
                         coordinate={marker.latlng}
                         title={marker.title}
                         description={marker.description}
