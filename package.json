@@ -1,6 +1,6 @@
 {
   "name": "ParkingLotTrackerMobileApp",
-  "version": "0.0.1",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "watch": "npm run build -- -w",
@@ -24,17 +24,17 @@
     "react-navigation": "^1.0.0-beta.7"
   },
   "devDependencies": {
-    "@types/jest": "^19.2.2",
-    "@types/react": "^15.0.21",
-    "@types/react-native": "^0.43.1",
+    "@types/jest": "19.2.2",
+    "@types/react": "15.0.21",
+    "@types/react-native": "0.43.1",
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
-    "concurrently": "^3.4.0",
+    "concurrently": "3.4.0",
     "jest": "19.0.2",
     "react-test-renderer": "15.4.2",
-    "rimraf": "^2.6.1",
-    "tslint": "^5.0.0",
-    "typescript": "^2.2.2"
+    "rimraf": "2.6.1",
+    "tslint": "5.0.0",
+    "typescript": "2.2.2"
   },
   "jest": {
     "preset": "react-native",
